@@ -72,7 +72,7 @@ module "case-definition-store-api" {
 }
 
 module "definition-store-db" {
-  source = "git@github.com:hmcts/moj-module-postgres?ref=master"
+  source = "git@github.com:hmcts/moj-module-postgres?ref=RDM-2318-slow_query_logging"
   product = "${local.app_full_name}-postgres-db"
   location = "${var.location}"
   env = "${var.env}"
@@ -82,6 +82,7 @@ module "definition-store-db" {
   sku_tier = "GeneralPurpose"
   storage_mb = "51200"
   common_tags  = "${var.common_tags}"
+  log_min_duration_statement = 502
 }
 
 module "definition-store-vault" {
