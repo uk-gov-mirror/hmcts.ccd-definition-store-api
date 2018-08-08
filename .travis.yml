@@ -4,6 +4,10 @@ jdk:
 
 env:
   global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    # via the "travis encrypt" command using the project repo's public key
+    # encypted for db/$project
+    - secure: "i1mJND7+boNc2QP4F/ZbKEYACpmMPmBFryaSp3qPARdljEDIwmlq4DaXVWx4AxXU0T2+Tvjw8KB3/snSBrlYXxrqEdCqmbTsYgzs8RuypZHg4r8R1qJgmz60Jyq6Npe4lK2f2o70ApF/yIIG5lSUgvKR5qyBFiZKaVM0DOEQ0s+r4NHU8YhB6WPm2veWfmtA7Lc20CuD6aya9QYq1YKAT7t7bSMwOC85gG4lrcH+PuMKjcoocwWhvVJ5msrlgZBghSCP2Asc+PtvWg6AZ7WTZUCAUZp+bdHRUeyAnet3ardKJ6u/zo0fgtPGrTR1da0maxFxhuM6gnbLi64iFl0o3YU8v/Cz0Jkiz2UoZQ+FdUAWLCf+JHZy1nPh0oEOiGmol7vMB7pNc7Nv+/SS1MLJKkFvYVy5M6KCq50Yi4g/aSfKQli9dxPDTAAWe59sNd3nSy2VaDA2nV6ccoh8Z1tpjggTlInV8CvM1TXTVqY9RlXBpofQnq3U+g/UvKeq/Cct7spT4Sp9Tn2UGhgCGUjHaBIqb0M9cZIbG5m4oGbCiuZ0qOFaZXmdib6os1tfBrusml2BW5pm8pbc78dDPX0S9dYLqyVWTmVLq6ez9rcR9CnCd7c6hiCckuzpATZ0ei/NKf1hzvhjCD+KH69pfI+c+QpLj7lTlJECyCA1XXocEl8="
     - CODACY_PROJECT_TOKEN=e9c07f97fad84186826f873f384a6112
 
 before_cache:
