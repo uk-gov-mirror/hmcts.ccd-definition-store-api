@@ -1,2 +1,2 @@
-capacity = "2"
+capacity = "1"
 use_uk_db = "true"
