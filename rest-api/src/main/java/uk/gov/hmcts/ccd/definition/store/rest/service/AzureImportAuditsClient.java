@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import uk.gov.hmcts.ccd.definition.store.rest.model.ImportAudit;
 
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class AzureImportAuditsClient {
      */
     public List<ImportAudit> fetchAllImportAudits() throws StorageException {
         List<ImportAudit> audits = new ArrayList<>();
+        final long start = System.currentTimeMillis();
         for (ListBlobItem lbi : cloudBlobContainer.listBlobs()) {
             if (lbi instanceof CloudBlockBlob) {
                 final CloudBlockBlob cbb = (CloudBlockBlob)lbi;
@@ -62,9 +65,22 @@ public class AzureImportAuditsClient {
                 audit.setUri(cbb.getUri());
                 audit.setOrder(createdTime);
                 audits.add(audit);
+                final long now = System.currentTimeMillis();
+                if (now - start > 1000) {
+                    break;
+                }
             }
         }
         sort(audits, (o1, o2) -> o2.getOrder().compareTo(o1.getOrder()));
         return audits;
+    }
+
+    public void loadBlob(String id, OutputStream outputStream) {
+        try {
+            CloudBlockBlob blob = cloudBlobContainer.getBlockBlobReference(id);
+            blob.download(outputStream);
+        } catch (URISyntaxException | StorageException e) {
+//            throw new CantReadDocumentContentVersionBinaryException(e, documentContentVersion);
+        }
     }
 }
