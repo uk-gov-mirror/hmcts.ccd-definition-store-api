@@ -47,11 +47,6 @@ public class AzureImportAuditsClient {
             if (lbi instanceof CloudBlockBlob) {
                 final CloudBlockBlob cbb = (CloudBlockBlob)lbi;
                 cbb.downloadAttributes();
-                try {
-                    cbb.acquireLease();
-                } catch (Exception e) {
-                    // do nothing
-                }
                 final ImportAudit audit = new ImportAudit();
                 final BlobProperties properties = cbb.getProperties();
                 final HashMap<String, String> metadata = cbb.getMetadata();
