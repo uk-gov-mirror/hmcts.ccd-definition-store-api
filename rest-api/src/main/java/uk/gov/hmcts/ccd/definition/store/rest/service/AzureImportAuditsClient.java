@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ccd.definition.store.rest.service;
 
+import com.microsoft.azure.storage.AccessCondition;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.BlobProperties;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
@@ -44,7 +45,7 @@ public class AzureImportAuditsClient {
             if (lbi instanceof CloudBlockBlob) {
                 final CloudBlockBlob cbb = (CloudBlockBlob)lbi;
                 cbb.downloadAttributes();
-                cbb.acquireLease();
+                cbb.renewLease(AccessCondition.generateIfNotExistsCondition());
                 final ImportAudit audit = new ImportAudit();
                 final BlobProperties properties = cbb.getProperties();
                 final HashMap<String, String> metadata = cbb.getMetadata();
