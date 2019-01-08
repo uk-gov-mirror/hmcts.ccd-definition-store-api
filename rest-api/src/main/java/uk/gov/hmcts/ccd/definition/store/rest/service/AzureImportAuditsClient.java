@@ -42,7 +42,6 @@ public class AzureImportAuditsClient {
      */
     public List<ImportAudit> fetchAllImportAudits() throws StorageException {
         List<ImportAudit> audits = new ArrayList<>();
-        final long start = System.currentTimeMillis();
         for (ListBlobItem lbi : cloudBlobContainer.listBlobs()) {
             if (lbi instanceof CloudBlockBlob) {
                 final CloudBlockBlob cbb = (CloudBlockBlob)lbi;
@@ -60,10 +59,6 @@ public class AzureImportAuditsClient {
                 audit.setUri(cbb.getUri());
                 audit.setOrder(createdTime);
                 audits.add(audit);
-                final long now = System.currentTimeMillis();
-                if (now - start > 1000) {
-                    break;
-                }
             }
         }
         sort(audits, (o1, o2) -> o2.getOrder().compareTo(o1.getOrder()));
