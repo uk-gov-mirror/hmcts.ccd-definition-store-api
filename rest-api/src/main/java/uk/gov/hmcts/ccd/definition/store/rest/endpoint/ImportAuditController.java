@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.ccd.definition.store.rest.model.ImportAudit;
@@ -48,13 +48,13 @@ class ImportAuditController {
         }
     }
 
-    @GetMapping(value = "/definitionblob/{id}")
-    @ApiOperation("Gets the definition blob content by id.")
+    @PostMapping(value = "/definitionblob")
+    @ApiOperation("Fetches the definition blob content by id.")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Returns definition content of a blob")
     })
     public ResponseEntity<Object> getDefinitionBlobContent(
-        @PathVariable String id,
+//        @PathVariable String id,
         HttpServletResponse response) {
 
 //        response.setHeader(CONTENT_TYPE, documentContentVersion.getMimeType());
@@ -62,7 +62,7 @@ class ImportAuditController {
 //        response.setHeader("OriginalFileName", documentContentVersion.getOriginalDocumentName());
 //        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
 //                           String.format("fileName=\"%s\"", documentContentVersion.getOriginalDocumentName()));
-
+String id = "20190108174108_ccd-definition.xlsx";
         try {
             final CloudBlockBlob blob = azureImportAuditsClient.loadBlob(id);
             blob.download(response.getOutputStream());
