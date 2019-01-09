@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import uk.gov.hmcts.ccd.definition.store.rest.model.ImportAudit;
 
-import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -65,12 +64,7 @@ public class AzureImportAuditsClient {
         return audits;
     }
 
-    public void loadBlob(String id, OutputStream outputStream) {
-        try {
-            CloudBlockBlob blob = cloudBlobContainer.getBlockBlobReference(id);
-            blob.download(outputStream);
-        } catch (URISyntaxException | StorageException e) {
-//            throw new CantReadDocumentContentVersionBinaryException(e, documentContentVersion);
-        }
+    public CloudBlockBlob loadBlob(String id) throws URISyntaxException, StorageException {
+        return cloudBlobContainer.getBlockBlobReference(id);
     }
 }
