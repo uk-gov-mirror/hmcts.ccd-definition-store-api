@@ -48,12 +48,12 @@ class ImportAuditController {
         }
     }
 
-    @GetMapping(value = "/azureblob/{id}")
-    @ApiOperation("Gets the blob content by id.")
+    @GetMapping(value = "/definitionlob/{id}")
+    @ApiOperation("Gets the definition blob content by id.")
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Returns contents of a blob")
+        @ApiResponse(code = 200, message = "Returns definition content of a blob")
     })
-    public ResponseEntity<Object> getBlobContent(
+    public ResponseEntity<Object> getDefinitionBlobContent(
         @PathVariable String id,
         HttpServletResponse response) {
 
