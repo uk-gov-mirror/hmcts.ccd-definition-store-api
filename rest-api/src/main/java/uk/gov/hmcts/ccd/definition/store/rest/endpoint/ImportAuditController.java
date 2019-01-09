@@ -48,7 +48,7 @@ class ImportAuditController {
         }
     }
 
-    @GetMapping(value = "/definitionlob/{id}")
+    @GetMapping(value = "/definitionblob/{id}")
     @ApiOperation("Gets the definition blob content by id.")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Returns definition content of a blob")
