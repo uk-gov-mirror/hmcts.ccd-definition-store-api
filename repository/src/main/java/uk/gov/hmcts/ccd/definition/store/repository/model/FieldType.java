@@ -15,6 +15,7 @@ public class FieldType {
     private String min = null;
     private String max = null;
     private String regularExpression = null;
+    private String fieldTypeParameter = null;
     private List<FixedListItem> fixedListItems = new ArrayList<>();
     private List<CaseField> complexFields = new ArrayList<>();
     private FieldType collectionFieldType = null;
@@ -63,6 +64,15 @@ public class FieldType {
 
     public void setRegularExpression(String regularExpression) {
         this.regularExpression = regularExpression;
+    }
+
+    @JsonProperty("field_type_parameter")
+    public String getFieldTypeParameter() {
+        return fieldTypeParameter;
+    }
+
+    public void setFieldTypeParameter(String fieldTypeParameter) {
+        this.fieldTypeParameter = fieldTypeParameter;
     }
 
     @JsonProperty("fixed_list_items")

@@ -35,7 +35,7 @@ public class FieldTypeParser {
         final FieldTypeEntity baseFieldType = baseFieldTypeOptional.orElseThrow(() -> new SpreadsheetParsingException("Missing field type: " + actualTypeReference));
 
         final FieldTypeEntity fieldType;
-        if (anyDefined(regularExpression, min, max)
+        if (anyDefined(regularExpression, min, max, fieldTypeParameter)
             || BASE_COLLECTION.equals(baseTypeReference)) {
             // Register new type
 
@@ -46,6 +46,7 @@ public class FieldTypeParser {
             fieldType.setBaseFieldType(baseFieldType);
             fieldType.setReference(FieldTypeEntity.uniqueReference(fieldId));
             fieldType.setRegularExpression(regularExpression);
+            fieldType.setFieldTypeParameter(fieldTypeParameter);
             fieldType.setMinimum(min);
             fieldType.setMaximum(max);
 

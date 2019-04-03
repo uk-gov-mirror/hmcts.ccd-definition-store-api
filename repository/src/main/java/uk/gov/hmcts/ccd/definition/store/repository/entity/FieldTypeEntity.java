@@ -41,6 +41,9 @@ public class FieldTypeEntity implements Serializable, Versionable {
     @Column(name = "regular_expression")
     private String regularExpression = null;
 
+    @Column(name = "field_type_parameter")
+    private String fieldTypeParameter = null;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "base_field_type_id")
     private FieldTypeEntity baseFieldType;
@@ -92,6 +95,14 @@ public class FieldTypeEntity implements Serializable, Versionable {
 
     public void setRegularExpression(String regularExpression) {
         this.regularExpression = regularExpression;
+    }
+
+    public String getFieldTypeParameter() {
+        return fieldTypeParameter;
+    }
+
+    public void setFieldTypeParameter(String fieldTypeParameter) {
+        this.fieldTypeParameter = fieldTypeParameter;
     }
 
     public String getMinimum() {

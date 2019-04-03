@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="rdm-4444" author="andrzej.folga@hmcts.net">
+        <!-- DocumentAssembly -->
+        <insert tableName="field_type">
+            <column name="created_at" value="${now}" />
+            <column name="reference" value="DocumentAssembler" />
+            <column name="version" value="1" />
+        </insert>
+
+        <sql>
+            ALTER TABLE field_type ADD COLUMN field_type_parameter varchar(70)
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>
