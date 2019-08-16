@@ -257,9 +257,9 @@ public interface EntityToResponseDTOMapper {
 
         static List<FixedListItem> map(FieldTypeEntity fieldTypeEntity) {
             FieldTypeEntity baseFieldTypeEntity = fieldTypeEntity.getBaseFieldType();
-            if (baseFieldTypeEntity == null && FieldTypeEntity.isFixedList(fieldTypeEntity.getReference())) {
+            if (baseFieldTypeEntity == null && FieldTypeEntity.hasListReference(fieldTypeEntity.getReference())) {
                 return fieldTypeListItemMapper.entityToModel(fieldTypeEntity.getListItems());
-            } else if (baseFieldTypeEntity != null && FieldTypeEntity.isFixedList(baseFieldTypeEntity.getReference())) {
+            } else if (baseFieldTypeEntity != null && FieldTypeEntity.hasListReference(baseFieldTypeEntity.getReference())) {
                 return fieldTypeListItemMapper.entityToModel(fieldTypeEntity.getListItems());
             }
             return new ArrayList<>();

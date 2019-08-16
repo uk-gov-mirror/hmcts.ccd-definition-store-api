@@ -29,11 +29,13 @@ public class ListFieldTypeParser {
     private static final String FIXED_LIST_TYPE = "FixedList";
     private static final String FIXED_RADIO_LIST_TYPE = "FixedRadioList";
     private static final String MULTI_LIST_TYPE = "MultiSelectList";
+    private static final String DYNAMIC_LIST_TYPE = "DynamicList";
     public static final String NO_BASE_TYPE_FOUND = "No base type found for: ";
     private final ParseContext parseContext;
     private final FieldTypeEntity fixedListBaseType;
     private final FieldTypeEntity fixedRadioListBaseType;
     private final FieldTypeEntity multiListBaseType;
+    private final FieldTypeEntity dynamicListBaseType;
     private final SpreadsheetValidator spreadsheetValidator;
 
     public ListFieldTypeParser(ParseContext parseContext, final SpreadsheetValidator spreadsheetValidator) {
@@ -41,6 +43,7 @@ public class ListFieldTypeParser {
         fixedListBaseType = parseContext.getBaseType(FIXED_LIST_TYPE).orElseThrow(() -> new InvalidImportException(NO_BASE_TYPE_FOUND + FIXED_LIST_TYPE));
         fixedRadioListBaseType = parseContext.getBaseType(FIXED_RADIO_LIST_TYPE).orElseThrow(() -> new InvalidImportException(NO_BASE_TYPE_FOUND + FIXED_RADIO_LIST_TYPE));
         multiListBaseType = parseContext.getBaseType(MULTI_LIST_TYPE).orElseThrow(() -> new InvalidImportException(NO_BASE_TYPE_FOUND + MULTI_LIST_TYPE));
+        dynamicListBaseType = parseContext.getBaseType(DYNAMIC_LIST_TYPE).orElseThrow(() -> new InvalidImportException(NO_BASE_TYPE_FOUND + DYNAMIC_LIST_TYPE));
         this.spreadsheetValidator = spreadsheetValidator;
 
     }
@@ -117,6 +120,22 @@ public class ListFieldTypeParser {
         multiListType.addListItems(multiListItems);
         parseContext.addToAllTypes(multiListType);
         result.addNew(multiListType);
+
+        // Add as DynamicList
+        final List<FieldTypeListItemEntity> dynamicListItems = elements.stream()
+            .map(this::parseListItem)
+            .collect(toList());
+
+        final FieldTypeEntity dynamicListType = new FieldTypeEntity();
+        dynamicListType.setBaseFieldType(dynamicListBaseType);
+        String dynamicListTypeReference = ReferenceUtils.listReference(DYNAMIC_LIST_TYPE, listDataItems.getKey());
+        spreadsheetValidator.validate(SheetName.FIXED_LISTS.getName(), "ID",
+                                      dynamicListTypeReference, DYNAMIC_LIST_TYPE);
+        dynamicListType.setReference(dynamicListTypeReference);
+        dynamicListType.setJurisdiction(parseContext.getJurisdiction());
+        dynamicListType.addListItems(dynamicListItems);
+        parseContext.addToAllTypes(dynamicListType);
+        result.addNew(dynamicListType);
 
         return result;
     }

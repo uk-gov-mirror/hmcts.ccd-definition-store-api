@@ -28,7 +28,7 @@ public class FieldTypeParser {
         final String min = element.getString(ColumnName.MIN);
         final String max = element.getString(ColumnName.MAX);
 
-        final String actualTypeReference = FieldTypeUtils.isList(baseTypeReference) ?
+        final String actualTypeReference = FieldTypeUtils.isList(baseTypeReference) && null != fieldTypeParameter ?
             ReferenceUtils.listReference(baseTypeReference, fieldTypeParameter) : baseTypeReference;
 
         final Optional<FieldTypeEntity> baseFieldTypeOptional = parseContext.getType(actualTypeReference);

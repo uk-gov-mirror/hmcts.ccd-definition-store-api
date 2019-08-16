@@ -83,9 +83,11 @@ public class FieldTypeEntity implements Serializable, Versionable {
     @JoinColumn(name = "jurisdiction_id")
     private JurisdictionEntity jurisdiction;
 
-    private static final Set<String> FIXED_List_ITEMS = new HashSet<>(Arrays.asList(new String[] {"FixedList",
-                                                                                                  "MultiSelectList",
-                                                                                                  "FixedRadioList"}));
+    private static final Set<String> FIXED_LIST_TYPES = new HashSet<>(Arrays.asList(new String[]{
+        "FixedList",
+        "MultiSelectList",
+        "FixedRadioList",
+        "DynamicList"}));
 
     public Integer getId() {
         return id;
@@ -188,17 +190,17 @@ public class FieldTypeEntity implements Serializable, Versionable {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                          .add("reference", reference)
-                          .add("version", version)
-                          .toString();
+            .add("reference", reference)
+            .add("version", version)
+            .toString();
     }
 
     public static String uniqueReference(String id) {
         return String.format("%s-%s", id, UUID.randomUUID());
     }
 
-    public static boolean isFixedList(String reference) {
-        return FIXED_List_ITEMS.contains(reference);
+    public static boolean hasListReference(String reference) {
+        return FIXED_LIST_TYPES.contains(reference);
     }
 
     @Transient
