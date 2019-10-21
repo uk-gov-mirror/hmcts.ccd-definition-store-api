@@ -450,12 +450,6 @@ public class SpreadsheetValidationErrorMessageCreator implements ValidationError
 
     @Override
     public String createErrorMessage(
-        EventCaseFieldCasePaymentHistoryViewerCaseFieldValidator.ValidationError validationError) {
-        return withWorkSheetName(validationError);
-    }
-
-    @Override
-    public String createErrorMessage(
         EventCaseFieldCaseHistoryViewerCaseFieldValidator.ValidationError validationError) {
         return withWorkSheetName(validationError);
     }
