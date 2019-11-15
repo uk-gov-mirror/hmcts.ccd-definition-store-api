@@ -420,7 +420,7 @@ task codeCoverageReport(type: JacocoReport, dependsOn: allprojects*.test) {
 }
 
 // for cnp pipeline
-//task dependencyCheck(dependsOn: dependencyCheckAnalyze)
+task dependencyCheck(dependsOn: dependencyCheckAnalyze)
 
 configurations { codacy }
 repositories {
