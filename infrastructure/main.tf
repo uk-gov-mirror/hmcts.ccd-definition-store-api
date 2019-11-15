@@ -50,6 +50,12 @@ data "azurerm_key_vault" "s2s_vault" {
   resource_group_name = "rpe-service-auth-provider-${local.local_env}"
 }
 
+resource "azurerm_key_vault_secret" "ccd_definition_s2s_secret" {
+  name = "ccd-definition-s2s-secret"
+  value = "${data.azurerm_key_vault_secret.definition_store_s2s_secret.value}"
+  key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
+}
+
 resource "azurerm_storage_container" "imports_container" {
   name = "${local.app_full_name}-imports-${var.env}"
   resource_group_name = "${local.sharedResourceGroup}"
@@ -142,6 +148,13 @@ module "case-definition-store-api" {
     ADMIN_WEB_AUTHORIZATION_MANAGE_DEFINITION_0 = "ccd-import"
     ADMIN_WEB_AUTHORIZATION_IMPORT_DEFINITION_0 = "ccd-import"
     // TODO More roles to be added to the appropriate actions, once they are created in IdAM
+
+    CCD_AM_WRITE_TO_CCD_ONLY = "${var.ccd_am_write_to_ccd_only}"
+    CCD_AM_WRITE_TO_AM_ONLY = "${var.ccd_am_write_to_am_only}"
+    CCD_AM_WRITE_TO_BOTH = "${var.ccd_am_write_to_both}"
+    CCD_AM_READ_FROM_CCD = "${var.ccd_am_read_from_ccd}"
+    CCD_AM_READ_FROM_AM = "${var.ccd_am_read_from_am}"
+
   }
   common_tags = "${var.common_tags}"
 }
@@ -166,31 +179,31 @@ module "definition-store-db" {
 ////////////////////////////////
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
-  name = "${local.app_full_name}-POSTGRES-USER"
+  name = "${var.component}-POSTGRES-USER"
   value = "${module.definition-store-db.user_name}"
   key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
-  name = "${local.app_full_name}-POSTGRES-PASS"
+  name = "${var.component}-POSTGRES-PASS"
   value = "${module.definition-store-db.postgresql_password}"
   key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
-  name = "${local.app_full_name}-POSTGRES-HOST"
+  name = "${var.component}-POSTGRES-HOST"
   value = "${module.definition-store-db.host_name}"
   key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
-  name = "${local.app_full_name}-POSTGRES-PORT"
+  name = "${var.component}-POSTGRES-PORT"
   value = "${module.definition-store-db.postgresql_listen_port}"
   key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
-  name = "${local.app_full_name}-POSTGRES-DATABASE"
+  name = "${var.component}-POSTGRES-DATABASE"
   value = "${module.definition-store-db.postgresql_database}"
   key_vault_id = "${data.azurerm_key_vault.ccd_shared_key_vault.id}"
 }
