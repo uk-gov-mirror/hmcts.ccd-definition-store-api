@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
         <notes>Netty cookie related</notes>
@@ -240,7 +240,7 @@
         <cve>CVE-2019-14439</cve>
         <cve>CVE-2019-7614</cve>
     <!-- RDM-6147 - should remove these suppressions -->
-    <suppress until="2019-11-11">
+    <suppress until="2019-11-22">
         <notes><![CDATA[ file name: jackson-databind-2.9.10.jar ]]></notes>
         <packageUrl regex="true">^pkg:maven/com\.fasterxml\.jackson\.core/jackson\-databind@.*$</packageUrl>
         <cve>CVE-2019-16942</cve>
@@ -262,34 +262,20 @@
         <notes><![CDATA[ file name: poi-ooxml-schemas-3.17.jar ]]></notes>
         <packageUrl regex="true">^pkg:maven/org\.apache\.poi/poi-ooxml-schemas@.*$</packageUrl>
         <cve>CVE-2019-12415</cve>
+        <cve>CVE-2018-1000632</cve>
     </suppress>
     <suppress>
         <cve>CVE-2019-17598</cve>
-        <cve>CVE-2019-16942</cve>
-    </suppress>
-    <suppress>
-        <cve>CVE-2019-16943</cve>
-        <cve>CVE-2019-17531</cve>
         <cve>CVE-2015-3337</cve>
-    </suppress>
-    <suppress>
         <cve>CVE-2019-7611</cve>
         <cve>CVE-2015-5377</cve>
-    </suppress>
-    <suppress>
         <cve>CVE-2015-5531</cve>
         <cve>CVE-2014-6439</cve>
-    </suppress>
-    <suppress>
         <cve>CVE-2019-7614</cve>
         <cve>CVE-2015-1427</cve>
         <cve>CVE-2018-17244</cve>
-    </suppress>
-    <suppress>
         <cve>CVE-2018-1000632</cve>
         <cve>CVE-2018-10237</cve>
-    </suppress>
-    <suppress>
         <cve>CVE-2018-1258</cve>
         <cve>CVE-2019-12415</cve>
     </suppress>
