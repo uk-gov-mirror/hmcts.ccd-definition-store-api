@@ -1,5 +1,9 @@
 package uk.gov.hmcts.ccd.definition.store.domain.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,6 @@ import uk.gov.hmcts.ccd.definition.store.repository.VersionedDefinitionRepositor
 import uk.gov.hmcts.ccd.definition.store.repository.entity.CaseTypeLiteEntity;
 import uk.gov.hmcts.ccd.definition.store.repository.entity.JurisdictionEntity;
 import uk.gov.hmcts.ccd.definition.store.repository.model.Jurisdiction;
-
-import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -53,7 +54,11 @@ public class JurisdictionServiceImpl implements JurisdictionService {
     @Override
     public List<Jurisdiction> getAll(List<String> references) {
         LOG.debug("retrieving jurisdictions {}", references);
-        List<JurisdictionEntity> jurisdictionEntities = repository.findAllLatestVersionByReference(references);
+        List<JurisdictionEntity> jurisdictionEntities = repository.findAllLatestVersionByReference(
+            references.stream()
+            .map(String::toLowerCase)
+            .collect(Collectors.toList())
+        );
         LOG.debug("retrieved jurisdictions {}", jurisdictionEntities);
         return jurisdictionEntities.stream()
             .map(entityToResponseDTOMapper::map)

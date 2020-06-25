@@ -83,7 +83,7 @@
     }, {
       "case_field_id" : "referenceCollection",
       "display_context" : "OPTIONAL",
-      "display_context_parameter" : "#TABLE(Title, FirstName, MiddleName)",
+      "display_context_parameter" : null,
       "show_condition" : null,
       "show_summary_change_option" : null,
       "show_summary_content_option" : null,
@@ -370,7 +370,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonLastNameWithValidation",
@@ -399,7 +401,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonLastName",
@@ -440,7 +444,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonAddress",
@@ -455,75 +461,6 @@
       "regular_expression" : null,
       "fixed_list_items" : [ ],
       "complex_fields" : [ {
-        "metadata" : false,
-        "id" : "AddressLine1",
-        "case_type_id" : null,
-        "label" : "Address Line 1",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "RESTRICTED",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
-        "metadata" : false,
-        "id" : "AddressLine2",
-        "case_type_id" : null,
-        "label" : "Address Line 2",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "PRIVATE",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
-        "metadata" : false,
-        "id" : "AddressLine3",
-        "case_type_id" : null,
-        "label" : "Address Line 3",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "PRIVATE",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
         "metadata" : false,
         "id" : "Country",
         "case_type_id" : null,
@@ -545,7 +482,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : 1,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Postcode",
@@ -568,7 +507,84 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : "Country=\"Italy\""
+        "order" : 2,
+        "show_condition" : "Country=\"Italy\"",
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine1",
+        "case_type_id" : null,
+        "label" : "Address Line 1",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "RESTRICTED",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 3,
+        "show_condition" : null,
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine2",
+        "case_type_id" : null,
+        "label" : "Address Line 2",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "PRIVATE",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 4,
+        "show_condition" : null,
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine3",
+        "case_type_id" : null,
+        "label" : "Address Line 3",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "PRIVATE",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 5,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -631,7 +647,9 @@
       "delete" : false,
       "listElementCode" : "Postcode"
     } ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonHasSecondAddress",
@@ -660,7 +678,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonSecondAddress",
@@ -675,75 +695,6 @@
       "regular_expression" : null,
       "fixed_list_items" : [ ],
       "complex_fields" : [ {
-        "metadata" : false,
-        "id" : "AddressLine1",
-        "case_type_id" : null,
-        "label" : "Address Line 1",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "RESTRICTED",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
-        "metadata" : false,
-        "id" : "AddressLine2",
-        "case_type_id" : null,
-        "label" : "Address Line 2",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "PRIVATE",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
-        "metadata" : false,
-        "id" : "AddressLine3",
-        "case_type_id" : null,
-        "label" : "Address Line 3",
-        "hint_text" : null,
-        "field_type" : {
-          "id" : "Text",
-          "type" : "Text",
-          "min" : null,
-          "max" : null,
-          "regular_expression" : null,
-          "fixed_list_items" : [ ],
-          "complex_fields" : [ ],
-          "collection_field_type" : null
-        },
-        "hidden" : null,
-        "security_classification" : "PRIVATE",
-        "live_from" : null,
-        "live_until" : null,
-        "acls" : null,
-        "complexACLs" : [ ],
-        "show_condition" : null
-      }, {
         "metadata" : false,
         "id" : "Country",
         "case_type_id" : null,
@@ -765,7 +716,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : 1,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Postcode",
@@ -788,7 +741,84 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : "Country=\"Italy\""
+        "order" : 2,
+        "show_condition" : "Country=\"Italy\"",
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine1",
+        "case_type_id" : null,
+        "label" : "Address Line 1",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "RESTRICTED",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 3,
+        "show_condition" : null,
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine2",
+        "case_type_id" : null,
+        "label" : "Address Line 2",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "PRIVATE",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 4,
+        "show_condition" : null,
+        "display_context_parameter" : null
+      }, {
+        "metadata" : false,
+        "id" : "AddressLine3",
+        "case_type_id" : null,
+        "label" : "Address Line 3",
+        "hint_text" : null,
+        "field_type" : {
+          "id" : "Text",
+          "type" : "Text",
+          "min" : null,
+          "max" : null,
+          "regular_expression" : null,
+          "fixed_list_items" : [ ],
+          "complex_fields" : [ ],
+          "collection_field_type" : null
+        },
+        "hidden" : null,
+        "security_classification" : "PRIVATE",
+        "live_from" : null,
+        "live_until" : null,
+        "acls" : null,
+        "complexACLs" : [ ],
+        "order" : 5,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -810,7 +840,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "HasOtherInfo",
@@ -833,7 +865,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonAddressGlobal",
@@ -869,7 +903,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine2",
@@ -892,7 +928,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine3",
@@ -915,7 +953,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostTown",
@@ -938,7 +978,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "County",
@@ -961,7 +1003,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Country",
@@ -984,7 +1028,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostCode",
@@ -1007,7 +1053,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -1017,7 +1065,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonAddressUK",
@@ -1053,7 +1103,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine2",
@@ -1076,7 +1128,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine3",
@@ -1099,7 +1153,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostTown",
@@ -1122,7 +1178,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "County",
@@ -1145,7 +1203,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostCode",
@@ -1168,7 +1228,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Country",
@@ -1191,7 +1253,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -1201,7 +1265,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonAddressGlobalUK",
@@ -1237,7 +1303,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine2",
@@ -1260,7 +1328,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "AddressLine3",
@@ -1283,7 +1353,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostTown",
@@ -1306,7 +1378,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "County",
@@ -1329,7 +1403,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Country",
@@ -1352,7 +1428,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PostCode",
@@ -1375,7 +1453,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -1385,7 +1465,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonOrderSummary",
@@ -1421,7 +1503,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "PaymentTotal",
@@ -1444,7 +1528,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       }, {
         "metadata" : false,
         "id" : "Fees",
@@ -1488,7 +1574,9 @@
               "live_until" : null,
               "acls" : null,
               "complexACLs" : [ ],
-              "show_condition" : null
+              "order" : null,
+              "show_condition" : null,
+              "display_context_parameter" : null
             }, {
               "metadata" : false,
               "id" : "FeeDescription",
@@ -1511,7 +1599,9 @@
               "live_until" : null,
               "acls" : null,
               "complexACLs" : [ ],
-              "show_condition" : null
+              "order" : null,
+              "show_condition" : null,
+              "display_context_parameter" : null
             }, {
               "metadata" : false,
               "id" : "FeeAmount",
@@ -1534,7 +1624,9 @@
               "live_until" : null,
               "acls" : null,
               "complexACLs" : [ ],
-              "show_condition" : null
+              "order" : null,
+              "show_condition" : null,
+              "display_context_parameter" : null
             }, {
               "metadata" : false,
               "id" : "FeeVersion",
@@ -1557,7 +1649,9 @@
               "live_until" : null,
               "acls" : null,
               "complexACLs" : [ ],
-              "show_condition" : null
+              "order" : null,
+              "show_condition" : null,
+              "display_context_parameter" : null
             } ],
             "collection_field_type" : null
           }
@@ -1568,7 +1662,9 @@
         "live_until" : null,
         "acls" : null,
         "complexACLs" : [ ],
-        "show_condition" : null
+        "order" : null,
+        "show_condition" : null,
+        "display_context_parameter" : null
       } ],
       "collection_field_type" : null
     },
@@ -1584,7 +1680,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "PersonCasePaymentHistoryViewer",
@@ -1613,7 +1711,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "CaseHistoryViewer",
@@ -1642,7 +1742,9 @@
       "delete" : false
     } ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "referenceCollection",
@@ -1686,7 +1788,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         }, {
           "metadata" : false,
           "id" : "FirstName",
@@ -1709,7 +1813,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         }, {
           "metadata" : false,
           "id" : "MiddleName",
@@ -1732,7 +1838,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         }, {
           "metadata" : false,
           "id" : "LastName",
@@ -1755,7 +1863,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         }, {
           "metadata" : false,
           "id" : "DateOfBirth",
@@ -1778,7 +1888,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         }, {
           "metadata" : false,
           "id" : "NationalInsuranceNumber",
@@ -1801,7 +1913,9 @@
           "live_until" : null,
           "acls" : null,
           "complexACLs" : [ ],
-          "show_condition" : null
+          "order" : null,
+          "show_condition" : null,
+          "display_context_parameter" : null
         } ],
         "collection_field_type" : null
       }
@@ -1812,8 +1926,10 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
-  },{
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
+  }, {
     "metadata" : false,
     "id" : "dynamicListWithoutFTP",
     "case_type_id" : "TestAddressBookCase",
@@ -1835,7 +1951,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : false,
     "id" : "dynamicList",
@@ -1858,7 +1976,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[STATE]",
@@ -1893,7 +2013,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[JURISDICTION]",
@@ -1916,7 +2038,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[CASE_TYPE]",
@@ -1939,7 +2063,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[SECURITY_CLASSIFICATION]",
@@ -1962,7 +2088,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[CASE_REFERENCE]",
@@ -1985,7 +2113,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[CREATED_DATE]",
@@ -2008,7 +2138,9 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   }, {
     "metadata" : true,
     "id" : "[LAST_MODIFIED_DATE]",
@@ -2031,7 +2163,34 @@
     "live_until" : null,
     "acls" : [ ],
     "complexACLs" : [ ],
-    "show_condition" : null
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
+  }, {
+    "metadata" : true,
+    "id" : "[LAST_STATE_MODIFIED_DATE]",
+    "case_type_id" : null,
+    "label" : "Last State Modified Date",
+    "hint_text" : null,
+    "field_type" : {
+      "id" : "Date",
+      "type" : "Date",
+      "min" : null,
+      "max" : null,
+      "regular_expression" : null,
+      "fixed_list_items" : [ ],
+      "complex_fields" : [ ],
+      "collection_field_type" : null
+    },
+    "hidden" : false,
+    "security_classification" : "PUBLIC",
+    "live_from" : "#date",
+    "live_until" : null,
+    "acls" : [ ],
+    "complexACLs" : [ ],
+    "order" : null,
+    "show_condition" : null,
+    "display_context_parameter" : null
   } ],
   "printable_document_url" : null,
   "security_classification" : "PRIVATE"

@@ -18,8 +18,7 @@ import org.mockito.MockitoAnnotations;
 import uk.gov.hmcts.ccd.definition.store.domain.showcondition.InvalidShowConditionException;
 import uk.gov.hmcts.ccd.definition.store.domain.validation.ValidationError;
 import uk.gov.hmcts.ccd.definition.store.domain.validation.ValidationResult;
-import uk.gov.hmcts.ccd.definition.store.repository.entity.DisplayGroupCaseFieldEntity;
-import uk.gov.hmcts.ccd.definition.store.repository.entity.DisplayGroupEntity;
+import uk.gov.hmcts.ccd.definition.store.repository.entity.*;
 
 public class DisplayGroupCaseFieldsValidatorImplTest {
 
@@ -53,6 +52,7 @@ public class DisplayGroupCaseFieldsValidatorImplTest {
 
         displayGroup.addDisplayGroupCaseField(e1);
         displayGroup.addDisplayGroupCaseField(e2);
+        displayGroup.setType(DisplayGroupType.TAB);
         when(validator1.validate(anyObject())).thenReturn(new ValidationResult(ve1));
         when(validator2.validate(anyObject())).thenReturn(new ValidationResult(ve2));
 
@@ -62,7 +62,7 @@ public class DisplayGroupCaseFieldsValidatorImplTest {
         verify(validator1).validate(e2);
         verify(validator2).validate(e1);
         verify(validator2).validate(e2);
-        assertThat(result.getValidationErrors(), hasSize(4));
+        assertThat(result.getValidationErrors(), hasSize(2));
         assertThat(result.getValidationErrors(), hasItems(ve1, ve2));
     }
 

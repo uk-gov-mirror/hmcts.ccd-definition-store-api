@@ -78,7 +78,7 @@ class ImportDefinitionTest extends BaseTest {
         assert (response.getBody().prettyPrint()
             .contains("Case Type with name 'Demo case' must have a Security Classification defined"));
     }
-    
+
     @Disabled("The response code should be 400 instead of 500. Code needs to be fixed.")
     @Test
     @DisplayName("Missing SecurityType ACL column in CaseType tab")
@@ -149,7 +149,7 @@ class ImportDefinitionTest extends BaseTest {
             .given()
             .multiPart(new File("src/resource/CCD_CNP_27_Invalid_User_Role.xlsx"))
             .expect()
-            .statusCode(422)
+            .statusCode(400)
             .when()
             .post("/import");
     }

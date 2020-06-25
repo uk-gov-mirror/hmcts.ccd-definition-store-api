@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ApiModel(description = "")
-public class CaseField implements HasAcls {
+public class CaseField implements HasAcls, Orderable {
 
     private String id = null;
     private String caseTypeId = null;
@@ -21,8 +21,10 @@ public class CaseField implements HasAcls {
     private String liveUntil = null;
     private List<AccessControlList> acls = new ArrayList<>();
     private List<ComplexACL> complexACLs = new ArrayList<>();
+    private Integer order;
     private String showCondition;
     private boolean metadata;
+    private String displayContextParameter;
 
     /**
      * The id of the case field
@@ -146,6 +148,17 @@ public class CaseField implements HasAcls {
     }
 
     @ApiModelProperty(value = "")
+    @JsonProperty("order")
+    @Override
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    @ApiModelProperty(value = "")
     @JsonProperty("acls")
     public List<AccessControlList> getAcls() {
         return this.acls;
@@ -172,5 +185,15 @@ public class CaseField implements HasAcls {
 
     public void setMetadata(boolean metadata) {
         this.metadata = metadata;
+    }
+
+    @ApiModelProperty(value = "")
+    @JsonProperty("display_context_parameter")
+    public String getDisplayContextParameter() {
+        return displayContextParameter;
+    }
+
+    public void setDisplayContextParameter(String displayContextParameter) {
+        this.displayContextParameter = displayContextParameter;
     }
 }

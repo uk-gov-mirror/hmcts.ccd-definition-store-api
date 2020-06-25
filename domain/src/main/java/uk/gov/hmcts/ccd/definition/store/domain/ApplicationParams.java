@@ -1,12 +1,11 @@
 package uk.gov.hmcts.ccd.definition.store.domain;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 
 @Named
 @Singleton
@@ -14,9 +13,6 @@ public class ApplicationParams {
 
     @Value("${ccd.user-profile.host}")
     private String userProfileHost;
-
-    @Value("${auth.idam.client.baseUrl}")
-    private String idamHost;
 
     @Value("#{'${ccd.am.write.to_ccd_only}'.split(',')}")
     private List<String> caseTypesWithAmWrittenOnlyToCcd;
@@ -33,12 +29,11 @@ public class ApplicationParams {
     @Value("#{'${ccd.am.read.from_am}'.split(',')}")
     private List<String> caseTypesWithAmReadFromAm;
 
+    @Value("${azure.storage.import_audits.get-limit}")
+    private String azureImportAuditsGetLimit;
+
     public String userProfilePutURL() {
         return userProfileHost + "/user-profile/users";
-    }
-
-    public String idamUserProfileURL() {
-        return idamHost + "/details";
     }
 
     public List<String> getCaseTypesWithAmWrittenOnlyToCcd() {
@@ -61,8 +56,13 @@ public class ApplicationParams {
         return caseTypesWithAmReadFromAm;
     }
 
+    public Integer getAzureImportAuditsGetLimit() {
+        return Integer.valueOf(azureImportAuditsGetLimit);
+    }
+
     @PostConstruct
     public void init() {
         new AmSwitchValidator().validateAmPersistenceSwitchesIn(this);
     }
+
 }

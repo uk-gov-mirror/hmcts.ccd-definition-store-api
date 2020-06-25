@@ -1,9 +1,10 @@
 package uk.gov.hmcts.ccd.definition.store.excel.parser;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
+
 import uk.gov.hmcts.ccd.definition.store.domain.service.metadata.MetadataField;
 import uk.gov.hmcts.ccd.definition.store.domain.showcondition.ShowConditionParser;
 import uk.gov.hmcts.ccd.definition.store.excel.validation.SpreadsheetValidator;
@@ -68,10 +69,10 @@ public class ParserFactory {
 
     public LayoutParser createLayoutParser(ParseContext parseContext) {
         return new LayoutParser(
-            new WorkbasketInputLayoutParser(parseContext, entityToDefinitionDataItemRegistry),
-            new WorkbasketLayoutParser(parseContext, entityToDefinitionDataItemRegistry),
-            new SearchInputLayoutParser(parseContext, entityToDefinitionDataItemRegistry),
-            new SearchResultLayoutParser(parseContext, entityToDefinitionDataItemRegistry),
+            new WorkbasketInputLayoutParser(parseContext, entityToDefinitionDataItemRegistry, showConditionParser),
+            new WorkbasketLayoutParser(parseContext, entityToDefinitionDataItemRegistry, showConditionParser),
+            new SearchInputLayoutParser(parseContext, entityToDefinitionDataItemRegistry, showConditionParser),
+            new SearchResultLayoutParser(parseContext, entityToDefinitionDataItemRegistry, showConditionParser),
             new CaseTypeTabParser(parseContext, showConditionParser, entityToDefinitionDataItemRegistry),
             new WizardPageParser(parseContext, showConditionParser, entityToDefinitionDataItemRegistry));
     }
@@ -79,4 +80,13 @@ public class ParserFactory {
     public UserProfilesParser createUserProfileParser() {
         return new UserProfilesParser();
     }
+
+    public BannerParser createBannerParser(ParseContext context) {
+        return new BannerParser(context);
+    }
+    
+    public JurisdictionUiConfigParser createJurisdictionUiConfigParser(ParseContext context) {
+        return new JurisdictionUiConfigParser(context);
+    }
+
 }
