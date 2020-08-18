@@ -33,6 +33,24 @@ elasticsearch:
                  }'
     alias: '{"type": "alias", "path": "data.<caseFieldPathPlaceHolder>"}'
     aliasTextSort: '{"type": "alias", "path": "data.<caseFieldPathPlaceHolder>.keyword"}'
+    ccdDynamicList: '{
+                        "properties": {
+                            "value": {
+                                "properties": {
+                                    "code": {
+                                      "type": "text" , "fields": { "keyword": { "type": "keyword", "ignore_above": 256}}
+                                    },
+                                    "label": {
+                                      "type": "text" , "fields": { "keyword": { "type": "keyword", "ignore_above": 256}}
+                                    }
+                                }
+                            },
+                                "list_items": {
+                                  "type": "object",
+                                  "enabled": false
+                            }
+                        }
+                    }'
   ccdIgnoredTypes:
     - Label
     - CasePaymentHistoryViewer
@@ -55,8 +73,9 @@ elasticsearch:
     FixedListEdit: ${elasticsearch.elasticMappings.defaultText}
     MultiSelectList: ${elasticsearch.elasticMappings.defaultText}
     FixedRadioList: ${elasticsearch.elasticMappings.defaultText}
-    DynamicList: ${elasticsearch.elasticMappings.defaultText}
+    DynamicList: ${elasticsearch.elasticMappings.ccdDynamicList}
   casesIndexNameFormat: ${ELASTIC_SEARCH_CASE_INDEX_NAME_FORMAT:%s_cases}
+  casesIndexMappingFieldsLimit: ${ELASTIC_SEARCH_CASE_INDEX_MAPPING_FIELDS_LIMIT:8000}
   casesIndexType: _doc
   # casePredefinedMappings configured as 'defaultText' need to be declared in the data-store elasticsearch.case-predefined-mappings.defaultText property
   casePredefinedMappings:
