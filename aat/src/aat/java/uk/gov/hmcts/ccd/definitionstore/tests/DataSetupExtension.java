@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
-import org.apache.commons.lang.BooleanUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
@@ -45,10 +45,10 @@ public class DataSetupExtension implements BeforeAllCallback {
         RestAssured.given()
             .header("Authorization", "Bearer " + caseworker.getAccessToken())
             .header("ServiceAuthorization", s2sToken)
-            .body("{\n" +
-                "\"role\": \"caseworker-autotest1\",\n" +
-                " \"security_classification\": \"PUBLIC\"\n" +
-                "}")
+            .body("{\n"
+                + "\"role\": \"caseworker-autotest1\",\n"
+                + " \"security_classification\": \"PUBLIC\"\n"
+                + "}")
             .contentType(ContentType.JSON)
             .when()
             .put("/api/user-role")

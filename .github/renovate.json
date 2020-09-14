@@ -1,0 +1,26 @@
+{
+  "baseBranches": ["develop"],
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "minor": {
+        "groupName": "every minor/patch dependency",
+        "groupSlug": "Renovate-all-minor-PR",
+        "automerge": true,
+        "labels": ["Renovate-Minor"]
+      },
+      "major": {
+        "automerge": false,
+        "labels": ["Renovate-Major"]
+      }
+    }
+  ],
+  "helm-requirements":
+    {
+      "enabled": true,
+      "fileMatch": ["\\Chart.yaml|requirements.yaml$"],
+      "aliases": {
+        "hmctspublic": "https://hmctspublic.azurecr.io/helm/v1/repo/"
+      }
+    }
+}

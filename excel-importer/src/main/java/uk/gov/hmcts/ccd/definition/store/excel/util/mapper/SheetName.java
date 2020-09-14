@@ -1,7 +1,7 @@
 package uk.gov.hmcts.ccd.definition.store.excel.util.mapper;
 
 /**
- * Enum to track all valid Sheet names for a Case Definition import
+ * Enum to track all valid Sheet names for a Case Definition import.
  */
 public enum SheetName {
     JURISDICTION("Jurisdiction"),
@@ -15,6 +15,7 @@ public enum SheetName {
     STATE("State"),
     WORK_BASKET_INPUT_FIELD("WorkBasketInputFields"),
     WORK_BASKET_RESULT_FIELDS("WorkBasketResultFields"),
+    SEARCH_CASES_RESULT_FIELDS("SearchCasesResultFields"),
     SEARCH_INPUT_FIELD("SearchInputFields"),
     SEARCH_RESULT_FIELD("SearchResultFields"),
     USER_PROFILE("UserProfile"),

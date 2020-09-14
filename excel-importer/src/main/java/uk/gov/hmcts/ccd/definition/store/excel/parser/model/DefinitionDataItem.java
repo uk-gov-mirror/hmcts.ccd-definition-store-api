@@ -154,8 +154,8 @@ public class DefinitionDataItem {
         final SecurityClassification securityClassification;
         try {
             securityClassification =
-                securityClassificationString != null ?
-                    SecurityClassification.valueOf(securityClassificationString.toUpperCase()) :
+                securityClassificationString != null
+                    ? SecurityClassification.valueOf(securityClassificationString.toUpperCase()) :
                     null;
             return new SecurityClassificationColumn(securityClassificationString, securityClassification);
         } catch (IllegalArgumentException e) {
@@ -190,6 +190,10 @@ public class DefinitionDataItem {
 
     public String getDisplayContextParameter() {
         return getString(ColumnName.DISPLAY_CONTEXT_PARAMETER);
+    }
+
+    public String getUseCase() {
+        return getString(ColumnName.USE_CASE);
     }
 
     public String getCaseFieldId() {

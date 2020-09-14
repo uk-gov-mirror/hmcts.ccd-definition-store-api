@@ -6,7 +6,7 @@ elasticsearch:
   indexShards: ${ELASTIC_SEARCH_INDEX_SHARDS:2}
   indexShardsReplicas: ${ELASTIC_SEARCH_INDEX_SHARDS_REPLICAS:0}
   failImportIfError: ${ELASTIC_SEARCH_FAIL_ON_IMPORT:false}
-  dynamic: ${ELASTIC_SEARCH_DYNAMIC:strict}
+  dynamic: ${ELASTIC_SEARCH_DYNAMIC:true}
   elasticMappings:
     disabled: '{"enabled": false}'
     defaultText: '{"type": "text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256}}}'
@@ -33,10 +33,29 @@ elasticsearch:
                  }'
     alias: '{"type": "alias", "path": "data.<caseFieldPathPlaceHolder>"}'
     aliasTextSort: '{"type": "alias", "path": "data.<caseFieldPathPlaceHolder>.keyword"}'
+    ccdDynamicList: '{
+                        "properties": {
+                            "value": {
+                                "properties": {
+                                    "code": {
+                                      "type": "text" , "fields": { "keyword": { "type": "keyword", "ignore_above": 256}}
+                                    },
+                                    "label": {
+                                      "type": "text" , "fields": { "keyword": { "type": "keyword", "ignore_above": 256}}
+                                    }
+                                }
+                            },
+                                "list_items": {
+                                  "type": "object",
+                                  "enabled": false
+                            }
+                        }
+                    }'
   ccdIgnoredTypes:
     - Label
     - CasePaymentHistoryViewer
     - CaseHistoryViewer
+  # typeMappings configured as 'defaultText' need to be declared in the data-store elasticsearch.type-mappings.defaultText property
   typeMappings:
     Text: ${elasticsearch.elasticMappings.defaultText}
     TextArea: ${elasticsearch.elasticMappings.defaultText}
@@ -54,9 +73,10 @@ elasticsearch:
     FixedListEdit: ${elasticsearch.elasticMappings.defaultText}
     MultiSelectList: ${elasticsearch.elasticMappings.defaultText}
     FixedRadioList: ${elasticsearch.elasticMappings.defaultText}
-    DynamicList: ${elasticsearch.elasticMappings.defaultText}
+    DynamicList: ${elasticsearch.elasticMappings.ccdDynamicList}
   casesIndexNameFormat: ${ELASTIC_SEARCH_CASE_INDEX_NAME_FORMAT:%s_cases}
   casesIndexType: _doc
+  # casePredefinedMappings configured as 'defaultText' need to be declared in the data-store elasticsearch.case-predefined-mappings.defaultText property
   casePredefinedMappings:
     reference: ${elasticsearch.elasticMappings.defaultText}
     jurisdiction: ${elasticsearch.elasticMappings.defaultText}
@@ -66,6 +86,7 @@ elasticsearch:
     last_modified: ${elasticsearch.elasticMappings.defaultDate}
     security_classification: ${elasticsearch.elasticMappings.defaultKeyword}
     case_type_id: ${elasticsearch.elasticMappings.defaultText}
+    last_state_modified_date: ${elasticsearch.elasticMappings.defaultDate}
 #    '[@timestamp]' brackets added for getting along with spring boot 2
     '[@timestamp]': ${elasticsearch.elasticMappings.disabled}
     '[@version]': ${elasticsearch.elasticMappings.disabled}

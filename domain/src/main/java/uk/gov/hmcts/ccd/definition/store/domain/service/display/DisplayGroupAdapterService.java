@@ -91,13 +91,12 @@ public class DisplayGroupAdapterService {
                                                   final List<String> allSubTypePossibilities,
                                                   final DisplayGroupCaseFieldEntity displayGroupCaseFieldEntity) {
         String reference = displayGroupCaseFieldEntity.getCaseField().getReference();
-        EventCaseFieldEntity eventCaseFieldEntity = getEventCaseFieldEntityByReference(
-            reference, displayGroupEntity.getEvent());
-
         WizardPageField wizardPageField = new WizardPageField();
         wizardPageField.setCaseFieldId(reference);
         wizardPageField.setOrder(displayGroupCaseFieldEntity.getOrder());
         wizardPageField.setPageColumnNumber(displayGroupCaseFieldEntity.getColumnNumber());
+        EventCaseFieldEntity eventCaseFieldEntity = getEventCaseFieldEntityByReference(
+            reference, displayGroupEntity.getEvent());
 
         if (DisplayContext.COMPLEX == eventCaseFieldEntity.getDisplayContext()) {
 
@@ -115,7 +114,9 @@ public class DisplayGroupAdapterService {
         return wizardPageField;
     }
 
-    private List<String> determineHiddenFieldsOverrides(final List<String> allSubTypePossibilities, final DisplayGroupCaseFieldEntity displayGroupCaseFieldEntity, final WizardPageField wizardPageField) {
+    private List<String> determineHiddenFieldsOverrides(final List<String> allSubTypePossibilities,
+                                                        final DisplayGroupCaseFieldEntity displayGroupCaseFieldEntity,
+                                                        final WizardPageField wizardPageField) {
         List<String> complexFieldOverrideIds = wizardPageField.getComplexFieldOverrides()
             .stream()
             .map(WizardPageComplexFieldOverride::getComplexFieldElementId)
@@ -135,6 +136,7 @@ public class DisplayGroupAdapterService {
         override.setLabel(eventComplexTypeEntity.getLabel());
         override.setHintText(eventComplexTypeEntity.getHint());
         override.setShowCondition(eventComplexTypeEntity.getShowCondition());
+        override.setDefaultValue(eventComplexTypeEntity.getDefaultValue());
         return override;
     }
 
