@@ -15,4 +15,6 @@ public interface JurisdictionService {
     List<Jurisdiction> getAll(List<String> references);
 
     void create(JurisdictionEntity jurisdiction);
+
+    List<String> getAllCaseTypeReferencesByJurisdiction(List<String> references);
 }

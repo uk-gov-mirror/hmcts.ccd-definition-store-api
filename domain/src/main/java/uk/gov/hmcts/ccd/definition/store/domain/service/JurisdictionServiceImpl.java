@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ccd.definition.store.domain.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,6 +65,13 @@ public class JurisdictionServiceImpl implements JurisdictionService {
             .map(entityToResponseDTOMapper::map)
             .map(this::attachCaseTypes)
             .collect(toList());
+    }
+
+    @Override
+    public List<String> getAllCaseTypeReferencesByJurisdiction(List<String> references){
+        List<CaseTypeLiteEntity> caseTypeLiteEntities =
+            caseTypeLiteRepository.findByJurisdictionIds(references);
+        return caseTypeLiteEntities.stream().map(caseTypeLiteEntity -> caseTypeLiteEntity.getReference()).collect(toList());
     }
 
     @Override

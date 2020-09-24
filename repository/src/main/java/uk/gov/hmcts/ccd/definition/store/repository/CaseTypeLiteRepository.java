@@ -12,4 +12,9 @@ public interface CaseTypeLiteRepository extends DefinitionRepository<CaseTypeLit
         + "WHERE cm.reference = c.reference) AND c.jurisdiction.reference = :jurisdictionReference")
     List<CaseTypeLiteEntity> findByJurisdictionId(@Param("jurisdictionReference") String jurisdiction);
 
+
+    @Query("SELECT c FROM CaseTypeLiteEntity c WHERE c.version IN (SELECT MAX(cm.version) FROM CaseTypeLiteEntity cm "
+        + "WHERE cm.reference = c.reference) AND c.jurisdiction.reference IN :jurisdictionReferences")
+    List<CaseTypeLiteEntity> findByJurisdictionIds(@Param("jurisdictionReferences") List<String> jurisdiction);
+
 }

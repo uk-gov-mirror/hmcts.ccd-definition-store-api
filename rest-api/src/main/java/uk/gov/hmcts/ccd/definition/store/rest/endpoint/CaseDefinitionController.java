@@ -14,8 +14,7 @@ import uk.gov.hmcts.ccd.definition.store.repository.model.CaseRole;
 import uk.gov.hmcts.ccd.definition.store.repository.model.CaseType;
 import uk.gov.hmcts.ccd.definition.store.repository.model.Jurisdiction;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @Api(value = "/api/data")
@@ -95,6 +94,21 @@ public class CaseDefinitionController {
         LOG.debug("received find jurisdictions request with ids: {}", idsOptional);
 
         return idsOptional.map(ids -> jurisdictionService.getAll(ids)).orElseGet(jurisdictionService::getAll);
+    }
+
+    @RequestMapping(value = "/data/jurisdictions/case-types", method = RequestMethod.GET, produces = {"application/json"})
+    @ApiOperation(value = "Get cases references by jurisdictions", response = Jurisdiction.class, responseContainer = "List")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "List of jurisdictions")
+    })
+    public List<String> findCasesReferencesByJurisdictions(
+        @ApiParam(value = "list of jurisdiction references") @RequestParam("ids") Optional<List<String>> idsOptional) {
+
+        LOG.debug("received find jurisdictions request with ids: {}", idsOptional);
+
+        return idsOptional.map(ids ->
+            jurisdictionService.getAllCaseTypeReferencesByJurisdiction(ids)).orElse(Collections.emptyList()
+        );
     }
 
     @RequestMapping(value = "/data/case-type/{ctid}/version",
