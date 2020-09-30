@@ -1,10 +1,5 @@
 package uk.gov.hmcts.ccd.definition.store.domain.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +10,10 @@ import uk.gov.hmcts.ccd.definition.store.repository.VersionedDefinitionRepositor
 import uk.gov.hmcts.ccd.definition.store.repository.entity.CaseTypeLiteEntity;
 import uk.gov.hmcts.ccd.definition.store.repository.entity.JurisdictionEntity;
 import uk.gov.hmcts.ccd.definition.store.repository.model.Jurisdiction;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -68,9 +67,10 @@ public class JurisdictionServiceImpl implements JurisdictionService {
     }
 
     @Override
-    public List<String> getAllCaseTypeReferencesByJurisdiction(List<String> references){
+    public List<String> getAllCaseTypeReferencesByJurisdiction(List<String> references) {
+
         List<CaseTypeLiteEntity> caseTypeLiteEntities =
-            caseTypeLiteRepository.findByJurisdictionIds(references);
+            caseTypeLiteRepository.findByJurisdictionIds(references.stream().map(String::toUpperCase).collect(Collectors.toList()));
         return caseTypeLiteEntities.stream().map(caseTypeLiteEntity -> caseTypeLiteEntity.getReference()).collect(toList());
     }
 

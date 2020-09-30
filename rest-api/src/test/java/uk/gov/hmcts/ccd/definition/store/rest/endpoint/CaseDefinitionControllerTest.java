@@ -184,6 +184,26 @@ public class CaseDefinitionControllerTest {
     }
 
     @Nested
+    @DisplayName("Test retrieval of Case type references by jurisdiction")
+    class CaseTYpeReferencesTests {
+
+        @Test
+        public void shouldCallJurisdictionGetAllWithListOfIds() {
+            subject.findCasesReferencesByJurisdictions(Optional.of(newArrayList("J1", "J2")));
+            ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
+            verify(jurisdictionService, times(1)).getAllCaseTypeReferencesByJurisdiction((List<String>) argument.capture());
+            List<String> value = argument.getValue();
+            assertThat(value, hasItems("J1", "J2"));
+        }
+
+        @Test
+        public void shouldCallJurisdictionGetAllWhenNoIds() {
+            subject.findCasesReferencesByJurisdictions(Optional.empty());
+            verify(jurisdictionService, times(0)).getAll(anyList());
+        }
+    }
+
+    @Nested
     @DisplayName("Case type version information")
     class VersionInfo {
 
