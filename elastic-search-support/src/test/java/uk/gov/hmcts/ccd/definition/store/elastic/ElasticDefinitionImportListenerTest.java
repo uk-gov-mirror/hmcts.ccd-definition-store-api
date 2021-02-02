@@ -1,15 +1,5 @@
 package uk.gov.hmcts.ccd.definition.store.elastic;
 
-import java.io.IOException;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +10,21 @@ import org.springframework.beans.factory.ObjectFactory;
 import uk.gov.hmcts.ccd.definition.store.elastic.client.HighLevelCCDElasticClient;
 import uk.gov.hmcts.ccd.definition.store.elastic.config.CcdElasticSearchProperties;
 import uk.gov.hmcts.ccd.definition.store.elastic.exception.ElasticSearchInitialisationException;
+import uk.gov.hmcts.ccd.definition.store.elastic.exception.handler.ElasticsearchErrorHandler;
 import uk.gov.hmcts.ccd.definition.store.elastic.mapping.CaseMappingGenerator;
 import uk.gov.hmcts.ccd.definition.store.event.DefinitionImportedEvent;
 import uk.gov.hmcts.ccd.definition.store.repository.entity.CaseTypeEntity;
 import uk.gov.hmcts.ccd.definition.store.utils.CaseTypeBuilder;
+
+import java.io.IOException;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ElasticDefinitionImportListenerTest {
@@ -42,6 +43,9 @@ public class ElasticDefinitionImportListenerTest {
 
     @Mock
     private CaseMappingGenerator caseMappingGenerator;
+
+    @Mock
+    private ElasticsearchErrorHandler elasticsearchErrorHandler;
 
     private CaseTypeEntity caseA = new CaseTypeBuilder().withJurisdiction("jurA").withReference("caseTypeA").build();
     private CaseTypeEntity caseB = new CaseTypeBuilder().withJurisdiction("jurB").withReference("caseTypeB").build();
@@ -122,8 +126,9 @@ public class ElasticDefinitionImportListenerTest {
     private static class TestDefinitionImportListener extends ElasticDefinitionImportListener {
 
         public TestDefinitionImportListener(CcdElasticSearchProperties config, CaseMappingGenerator mappingGenerator,
-                                            ObjectFactory<HighLevelCCDElasticClient> clientFactory) {
-            super(config, mappingGenerator, clientFactory);
+                                            ObjectFactory<HighLevelCCDElasticClient> clientFactory,
+                                            ElasticsearchErrorHandler elasticsearchErrorHandler) {
+            super(config, mappingGenerator, clientFactory, elasticsearchErrorHandler);
         }
 
         @Override
