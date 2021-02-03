@@ -42,6 +42,12 @@
 		<notes>Temporary suppression for on-going developments and master builds</notes>
 		<cve>CVE-2018-17244</cve>
 		<cve>CVE-2018-1258</cve>
+		<cve>CVE-2020-25649</cve>
+		<cve>CVE-2020-29244</cve>
+		<cve>CVE-2020-29245</cve>
+		<cve>CVE-2020-29242</cve>
+		<cve>CVE-2020-29243</cve>
+		<cve>CVE-2020-8908</cve>
 	</suppress>
 
 	<!-- !!!!!!! This suppression should not be removed until the elastic search
