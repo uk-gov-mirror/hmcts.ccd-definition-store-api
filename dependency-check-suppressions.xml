@@ -43,7 +43,6 @@
 		<cve>CVE-2018-17244</cve>
 			Jars: spring-security-***-5.3.4.RELEASE.jar
 			Analysis: False positive
-		]]></notes>
 		<cve>CVE-2018-1258</cve>
 	</suppress>
 
