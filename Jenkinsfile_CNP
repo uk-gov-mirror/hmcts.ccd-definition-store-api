@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure@ethosldata")
+@Library("Infrastructure")
 
 def type = "java"
 
