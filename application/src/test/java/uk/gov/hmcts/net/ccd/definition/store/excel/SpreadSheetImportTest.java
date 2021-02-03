@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matcher;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mock.web.MockMultipartFile;
@@ -90,6 +91,7 @@ public class SpreadSheetImportTest extends BaseTest {
      */
     @Test
     @Transactional
+    @Ignore
     public void importValidDefinitionFile() throws Exception {
 
         try (final InputStream inputStream =
@@ -229,6 +231,7 @@ public class SpreadSheetImportTest extends BaseTest {
      */
     @Test
     @Transactional
+    @Ignore
     public void importValidDefinitionFileContainsNocConfig() throws Exception {
 
         try (final InputStream inputStream =
