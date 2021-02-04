@@ -5,6 +5,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matcher;
 import org.json.JSONException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -74,7 +75,6 @@ public class SpreadSheetImportTest extends BaseTest {
      */
     @Test
     @Transactional
-    @Ignore
     public void importValidDefinitionFile() throws Exception {
 
         try (final InputStream inputStream =
