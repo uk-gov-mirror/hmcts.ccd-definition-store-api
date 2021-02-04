@@ -19,6 +19,7 @@ import uk.gov.hmcts.ccd.definition.store.excel.parser.model.DefinitionDataItem;
 import uk.gov.hmcts.ccd.definition.store.excel.parser.model.DefinitionSheet;
 import uk.gov.hmcts.ccd.definition.store.excel.util.mapper.ColumnName;
 import uk.gov.hmcts.ccd.definition.store.excel.util.mapper.SheetName;
+import uk.gov.hmcts.ccd.definition.store.excel.validation.HiddenFieldsValidator;
 import uk.gov.hmcts.ccd.definition.store.repository.DisplayContext;
 import uk.gov.hmcts.ccd.definition.store.repository.entity.CaseFieldEntity;
 import uk.gov.hmcts.ccd.definition.store.repository.entity.CaseTypeEntity;
@@ -31,7 +32,7 @@ import static java.util.Collections.singletonList;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -59,6 +60,9 @@ public class EventParserTest extends ParserTestBase {
     private EventCaseFieldComplexTypeParser eventCaseFieldComplexTypeParser;
 
     @Mock
+    private HiddenFieldsValidator hiddenFieldsValidator;
+
+    @Mock
     private EntityToDefinitionDataItemRegistry entityToDefinitionDataItemRegistry;
 
     @Captor
@@ -78,8 +82,8 @@ public class EventParserTest extends ParserTestBase {
             parseContext,
             eventCaseFieldParser,
             eventCaseFieldComplexTypeParser,
-            entityToDefinitionDataItemRegistry
-        );
+            entityToDefinitionDataItemRegistry,
+            true);
 
         caseType = new CaseTypeEntity();
         caseType.setReference(CASE_TYPE_UNDER_TEST);
@@ -243,16 +247,44 @@ public class EventParserTest extends ParserTestBase {
         when(eventCaseFieldParser.parseEventCaseField(any(), any())).thenReturn(eventCaseFieldEntity);
 
         EventComplexTypeEntity eventComplexTypeEntityMock = mock(EventComplexTypeEntity.class);
-        when(eventCaseFieldComplexTypeParser.parseEventCaseFieldComplexType(any()))
+        when(eventCaseFieldComplexTypeParser.parseEventCaseFieldComplexType(any(), any()))
             .thenReturn(Arrays.asList(eventComplexTypeEntityMock));
 
         final Collection<EventEntity> events = eventParser.parseAll(definitionSheets, caseType);
-
         verify(eventCaseFieldComplexTypeParser)
-            .parseEventCaseFieldComplexType(singletonList(caseEventToComplexTypesDataItem));
+            .parseEventCaseFieldComplexType(singletonList(caseEventToComplexTypesDataItem), definitionSheets);
 
         assertThat(events.size(), is(1));
         entity = new ArrayList<>(events).get(0);
+    }
+
+    @Test
+    public void shouldAssignDefaultPublishIfColumnNotExists() {
+        definitionSheet.addDataItem(item);
+        final Collection<EventEntity> eventEntities = eventParser.parseAll(definitionSheets, caseType);
+        assertThat(eventEntities.size(), is(1));
+        entity = new ArrayList<>(eventEntities).get(0);
+        assertThat(entity.getPublish(), is(true));
+    }
+
+    @Test
+    public void shouldAssignDefaultPublishIfColumnHasNullValue() {
+        item.addAttribute(ColumnName.PUBLISH.toString(), null);
+        definitionSheet.addDataItem(item);
+        final Collection<EventEntity> eventEntities = eventParser.parseAll(definitionSheets, caseType);
+        assertThat(eventEntities.size(), is(1));
+        entity = new ArrayList<>(eventEntities).get(0);
+        assertThat(entity.getPublish(), is(true));
+    }
+
+    @Test
+    public void shouldAssignPublishValueFromColumn() {
+        item.addAttribute(ColumnName.PUBLISH.toString(), "N");
+        definitionSheet.addDataItem(item);
+        final Collection<EventEntity> eventEntities = eventParser.parseAll(definitionSheets, caseType);
+        assertThat(eventEntities.size(), is(1));
+        entity = new ArrayList<>(eventEntities).get(0);
+        assertThat(entity.getPublish(), is(false));
     }
 
     private void assertEvent(final EventEntity entity) {
