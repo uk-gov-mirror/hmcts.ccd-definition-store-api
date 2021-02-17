@@ -1,5 +1,6 @@
 package uk.gov.hmcts.ccd.definition.store.excel.parser;
 
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -70,7 +71,7 @@ public class ParserFactory {
                     entityToDefinitionDataItemRegistry,
                     hiddenFieldsValidator
                 ),
-                new EventCaseFieldComplexTypeParser(showConditionParser),
+                new EventCaseFieldComplexTypeParser(showConditionParser, hiddenFieldsValidator),
                 entityToDefinitionDataItemRegistry,
                 applicationParams.isDefaultPublish()),
             new AuthorisationCaseTypeParser(context, entityToDefinitionDataItemRegistry),
@@ -104,10 +105,6 @@ public class ParserFactory {
 
     public JurisdictionUiConfigParser createJurisdictionUiConfigParser(ParseContext context) {
         return new JurisdictionUiConfigParser(context);
-    }
-
-    public NoCConfigParser createNoCConfigParser(ParseContext context) {
-        return new NoCConfigParser(context);
     }
 
     public ChallengeQuestionParser createNewChallengeQuestionParser() {

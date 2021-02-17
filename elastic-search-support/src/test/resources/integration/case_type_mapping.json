@@ -6,7 +6,8 @@
       "fields": {
         "keyword": {
           "type": "keyword",
-          "ignore_above": 256
+          "ignore_above": 256,
+          "normalizer": "lowercase_normalizer"
         }
       }
     },
@@ -15,7 +16,8 @@
       "fields": {
         "keyword": {
           "type": "keyword",
-          "ignore_above": 256
+          "ignore_above": 256,
+          "normalizer": "lowercase_normalizer"
         }
       }
     },
@@ -27,7 +29,8 @@
       "fields":{
         "keyword":{
           "type":"keyword",
-          "ignore_above":256
+          "ignore_above":256,
+          "normalizer": "lowercase_normalizer"
         }
       }
     },
@@ -40,14 +43,16 @@
       "ignore_malformed": true
     },
     "security_classification": {
-      "type": "keyword"
+      "type": "keyword",
+      "normalizer": "lowercase_normalizer"
     },
     "case_type_id": {
       "type":"text",
       "fields":{
         "keyword":{
           "type":"keyword",
-          "ignore_above":256
+          "ignore_above":256,
+          "normalizer": "lowercase_normalizer"
         }
       }
     },
@@ -71,7 +76,8 @@
           "fields": {
             "keyword": {
               "type": "keyword",
-              "ignore_above": 256
+              "ignore_above": 256,
+              "normalizer": "lowercase_normalizer"
             }
           }
         },
@@ -84,7 +90,8 @@
                   "fields": {
                     "keyword": {
                       "type": "keyword",
-                      "ignore_above": 256
+                      "ignore_above": 256,
+                      "normalizer": "lowercase_normalizer"
                     }
                   }
                 },
@@ -108,7 +115,8 @@
                   "fields": {
                     "keyword": {
                       "type": "keyword",
-                      "ignore_above": 256
+                      "ignore_above": 256,
+                      "normalizer": "lowercase_normalizer"
                     }
                   }
                 }
@@ -126,13 +134,46 @@
               "fields": {
                 "keyword": {
                   "type": "keyword",
-                  "ignore_above": 256
+                  "ignore_above": 256,
+                  "normalizer": "lowercase_normalizer"
                 }
               }
             }
           }
         },
         "dynamicList": {
+          "properties": {
+            "value": {
+              "properties": {
+                "code": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256,
+                      "normalizer": "lowercase_normalizer"
+                    }
+                  }
+                },
+                "label": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256,
+                      "normalizer": "lowercase_normalizer"
+                    }
+                  }
+                }
+              }
+            },
+            "list_items": {
+              "type": "object",
+              "enabled": false
+            }
+          }
+        },
+        "dynamicRadioList": {
           "properties": {
             "value": {
               "properties": {
@@ -155,6 +196,18 @@
                   }
                 }
               }
+            },
+            "list_items": {
+              "type": "object",
+              "enabled": false
+            }
+          }
+        },
+        "dynamicMultiSelectList": {
+          "properties": {
+            "value": {
+              "type": "object",
+              "enabled": false
             },
             "list_items": {
               "type": "object",
